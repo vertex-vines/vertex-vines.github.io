@@ -1,510 +1,258 @@
 <!doctype html>
 <html lang="en">
+
 <head>
+  <title>VINES - Quantum-Ready NextG</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>VINES: Quantum-Ready NextG</title>
-  <meta name="description" content="Collaborative Research: VINES Track 1 — Quantum-Ready and AI-Enabled by Design: Resilient and Deployable Next-Gen Cellular Networks. Purdue University, University of Texas at Dallas, University of South Florida.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <meta name="description" content="Collaborative Research: VINES: Track 1: Quantum-Ready and AI-Enabled by Design: Resilient and Deployable Next-Gen Cellular Networks.">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f9fb;
-      --surface: #ffffff;
-      --text: #14202e;
-      --muted: #5a6778;
-      --accent: #1f5fae;
-      --accent-soft: #e6eef9;
-      --t1: #2f7d5b; --t1-soft: #e3f2ea;
-      --t2: #b26a12; --t2-soft: #fbeedb;
-      --t3: #6b4bb3; --t3-soft: #eee8fa;
-      --ev: #b3364a; --ev-soft: #f9e4e8;
-      --border: #e1e5eb;
-      --radius: 12px;
-      --max: 1040px;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        --bg: #0e141b; --surface: #161e28; --text: #e6ebf1; --muted: #9aa7b6;
-        --accent: #6ea8ef; --accent-soft: #1a2b40;
-        --t1: #6cc89d; --t1-soft: #17302a;
-        --t2: #e7a852; --t2-soft: #33261a;
-        --t3: #ab92ec; --t3-soft: #251f3a;
-        --ev: #ec7d8f; --ev-soft: #37202a;
-        --border: #263241;
-      }
-    }
-    :root[data-theme="dark"] {
-      --bg: #0e141b; --surface: #161e28; --text: #e6ebf1; --muted: #9aa7b6;
-      --accent: #6ea8ef; --accent-soft: #1a2b40;
-      --t1: #6cc89d; --t1-soft: #17302a;
-      --t2: #e7a852; --t2-soft: #33261a;
-      --t3: #ab92ec; --t3-soft: #251f3a;
-      --ev: #ec7d8f; --ev-soft: #37202a;
-      --border: #263241;
-    }
+    /* Styling follows https://github.com/yenchiah/project-website-template (as used by maestro-ai.github.io) */
+    html, body { margin: 0; padding: 0; background-color: white; font-family: 'Open Sans', Helvetica, Arial, sans-serif; }
+    h2 { font-size: 24px; margin: 10px 0 0 0; padding: 0; font-weight: bold; }
+    h3 { font-size: 18px; margin: 10px 0 0 0; padding: 0; font-weight: bold; }
+    ul, ol { margin: 10px 0 10px 0; }
+    li { margin-bottom: 4px; }
+    hr { border: 0; height: 1px; background: #333; margin: 0 0 10px 0; }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; font-size: 16px; }
-    h1, h2, h3 { font-family: "Source Serif 4", Georgia, serif; line-height: 1.2; }
-    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+    .menu-container { position: sticky; top: 0; z-index: 2; width: 100%; background-color: #212121; }
+    .menu { margin: 0 auto; max-width: 900px; display: flex; justify-content: space-between; align-items: center; padding: 10px 10px; box-sizing: border-box; }
+    .logo { margin-left: 20px; }
+    .logo a { color: rgba(255, 255, 255, 0.8); font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif; font-size: 30px; text-decoration: none; font-weight: 700; }
+    .menu-items { margin: 0 20px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 20px; }
+    .menu-items a { color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 16px; white-space: nowrap; }
+    .menu-items a:hover { color: #fff; }
+    @media screen and (max-width: 760px) { .menu-items { display: none; } .logo a { font-size: 24px; } }
 
-    header.nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
-    header.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
-    .brand { font-weight: 700; text-decoration: none; color: var(--text); letter-spacing: .02em; }
-    .brand span { color: var(--accent); }
-    .links { display: flex; gap: 20px; list-style: none; overflow-x: auto; }
-    .links a { text-decoration: none; color: var(--muted); font-size: .9rem; font-weight: 500; white-space: nowrap; }
-    .links a:hover { color: var(--text); }
-    @media (max-width: 760px) { .links { display: none; } }
+    .content { margin: 0 auto; max-width: 900px; font-size: 16px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-weight: 300; line-height: 1.5; padding: 20px 10px; box-sizing: border-box; }
+    .content a { text-decoration: none; color: #005cbf; }
+    .content a:hover { text-decoration: underline; }
+    .content b, .content strong { font-weight: 700; }
+    .section { margin: 0 20px; }
+    .add-top-margin { margin-top: 30px; }
+    .text { margin: 10px 0; }
+    .muted { color: #666; }
 
-    .hero { padding: 64px 0 48px; border-bottom: 1px solid var(--border); }
-    .eyebrow { display: inline-block; font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); padding: 4px 10px; border-radius: 999px; }
-    .hero h1 { font-size: clamp(1.9rem, 4.6vw, 3rem); margin: 18px 0 14px; max-width: 24ch; }
-    .hero .sub { color: var(--muted); font-size: 1.1rem; max-width: 62ch; }
-    .insts { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 24px; font-weight: 600; font-size: .95rem; }
-    .insts span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; }
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
-    .tag { font-size: .8rem; border: 1px solid var(--border); background: var(--surface); padding: 3px 10px; border-radius: 999px; color: var(--muted); }
-
-    section { padding: 56px 0; border-bottom: 1px solid var(--border); }
-    section h2 { font-size: 1.75rem; margin-bottom: 18px; }
-    section h2 .num { color: var(--muted); font-weight: 600; margin-right: 8px; font-family: "Inter", sans-serif; font-size: 1rem; vertical-align: middle; }
-    p + p { margin-top: 12px; }
-    .lead { font-size: 1.05rem; max-width: 72ch; }
-    .muted { color: var(--muted); }
-
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
-    .grid { display: grid; gap: 16px; }
-    .g2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-    .g4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-
-    .goal { margin-top: 24px; border-left: 4px solid var(--accent); background: var(--accent-soft); padding: 16px 20px; border-radius: 0 var(--radius) var(--radius) 0; }
-
-    .rq { list-style: none; counter-reset: rq; margin-top: 12px; display: grid; gap: 10px; }
-    .rq li { counter-increment: rq; position: relative; padding-left: 40px; }
-    .rq li::before { content: "RQ" counter(rq); position: absolute; left: 0; top: 2px; font-size: .72rem; font-weight: 700; color: var(--accent); }
-
-    /* Framework diagram */
-    .figure { margin-top: 28px; }
+    .figure { margin: 15px 0; }
     .figure svg { width: 100%; height: auto; display: block; }
-    .figure figcaption { font-size: .85rem; color: var(--muted); margin-top: 8px; text-align: center; }
+    .caption { text-align: center; font-size: 14px; color: #555; margin-top: 4px; }
 
-    /* Thrusts */
-    .thrust { border-top: 4px solid var(--c); }
-    .thrust .label { font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--c); }
-    .thrust h3 { font-size: 1.2rem; margin: 6px 0 10px; }
-    .thrust .lead-pi { font-size: .85rem; color: var(--muted); margin-bottom: 12px; }
-    .tasks { list-style: none; display: grid; gap: 10px; }
-    .tasks li { font-size: .93rem; }
-    .tasks b { display: block; font-weight: 600; }
-    .tasks span { color: var(--muted); }
+    .table-wrap { overflow-x: auto; margin-top: 10px; }
+    .custom-table { border-collapse: collapse; width: 100%; font-size: 15px; }
+    .custom-table th, .custom-table td { border: 1px solid #ccc; padding: 6px 10px; text-align: center; }
+    .custom-table th { background-color: #ddd; font-weight: 700; }
+    .custom-table tr:nth-child(even) td { background-color: #f3f3f3; }
+    .custom-table td.left { text-align: left; }
 
-    /* People */
-    .person { display: flex; gap: 14px; align-items: flex-start; }
-    .avatar { flex: 0 0 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: var(--accent); background: var(--accent-soft); }
-    .person h3 { font-family: "Inter", sans-serif; font-size: 1rem; font-weight: 600; }
-    .person .role { font-size: .85rem; color: var(--muted); }
-    .person .area { font-size: .85rem; margin-top: 6px; }
-    .person a { font-size: .85rem; }
-
-    /* Timeline */
-    .gantt { width: 100%; border-collapse: collapse; font-size: .85rem; min-width: 640px; }
-    .gantt-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
-    .gantt th, .gantt td { border-bottom: 1px solid var(--border); padding: 8px 6px; text-align: center; }
-    .gantt th { font-weight: 600; color: var(--muted); font-size: .78rem; }
-    .gantt td.task { text-align: left; padding-left: 14px; white-space: nowrap; font-weight: 500; }
-    .gantt td.on { position: relative; }
-    .gantt td.on::after { content: ""; position: absolute; inset: 9px 0; background: var(--c); opacity: .85; }
-    .gantt td.on.first::after { left: 3px; border-radius: 4px 0 0 4px; }
-    .gantt td.on.last::after { right: 3px; border-radius: 0 4px 4px 0; }
-    .gantt tr:last-child td { border-bottom: 0; }
-    .gantt .yr { border-left: 1px solid var(--border); }
-
-    /* Publications */
-    .pubs { list-style: none; display: grid; gap: 14px; }
-    .pubs li { padding-left: 16px; border-left: 3px solid var(--border); }
-    .pubs .t { font-weight: 600; }
-    .pubs .a { color: var(--muted); font-size: .92rem; }
-    .pubs .v { font-size: .9rem; font-style: italic; }
-    .pill { display: inline-block; font-size: .7rem; font-weight: 700; padding: 1px 7px; border-radius: 4px; margin-left: 6px; vertical-align: 2px; font-style: normal; }
-
-    ul.plain { padding-left: 20px; display: grid; gap: 8px; }
-
-    footer { padding: 40px 0 56px; font-size: .88rem; color: var(--muted); }
-    footer .ack { max-width: 80ch; }
+    .venue { color: #993300; font-weight: 700; }
   </style>
 </head>
+
 <body>
-
-<header class="nav">
-  <div class="wrap">
-    <a class="brand" href="#top">VINES<span>·</span>NextG</a>
-    <ul class="links">
-      <li><a href="#summary">Summary</a></li>
-      <li><a href="#research">Research</a></li>
-      <li><a href="#people">People</a></li>
-      <li><a href="#timeline">Timeline</a></li>
-      <li><a href="#publications">Publications</a></li>
-      <li><a href="#software">Software</a></li>
-      <li><a href="#outreach">Outreach</a></li>
-    </ul>
-  </div>
-</header>
-
-<main id="top">
-  <div class="hero">
-    <div class="wrap">
-      <span class="eyebrow">NSF VINES · Track 1</span>
-      <h1>Quantum-Ready and AI-Enabled by Design: Resilient and Deployable Next-Gen Cellular Networks</h1>
-      <p class="sub">A vertically integrated framework for resilient, post-quantum secure NextG networks that brings together new cryptography, secure cellular protocols, and privacy-preserving AI, all evaluated on large-scale NSF wireless testbeds.</p>
-      <div class="insts">
-        <span>Purdue University</span>
-        <span>The University of Texas at Dallas</span>
-        <span>University of South Florida</span>
-      </div>
-      <div class="tags">
-        <span class="tag">A4: Resilience</span>
-        <span class="tag">B4: Security &amp; Privacy</span>
-        <span class="tag">Post-Quantum Cryptography</span>
-        <span class="tag">5G / NextG Protocols</span>
-        <span class="tag">Federated Learning</span>
-        <span class="tag">POWDER · Colosseum</span>
+  <div class="menu-container">
+    <div class="menu">
+      <div class="logo"><a href="index.html">VINES - Quantum-Ready NextG</a></div>
+      <div class="menu-items">
+        <a href="#summary">Summary</a>
+        <a href="#people">People</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#publications">Publications</a>
+        <a href="#software">Software</a>
+        <a href="#outreach">Outreach</a>
       </div>
     </div>
   </div>
 
-  <section id="summary">
-    <div class="wrap">
-      <h2><span class="num">01</span>Summary</h2>
-      <p class="lead">NextG networks have to keep performing through failures, attacks, and disruptions while protecting sensitive data and user privacy. Deployments are growing fast, and attackers have more remote and physical access to networking equipment than before, so protocols need to support distributed trust and stay secure even when parts of the network are breached. Quantum computers also threaten today's cryptographic foundations, so protocols need to be post-quantum (PQ) secure to stay safe in the long term.</p>
-      <p class="lead">This project develops <b>B4: Security &amp; Privacy</b> foundations together with <b>A4: Resilience</b> to deliver practical, scalable advances for NextG networks.</p>
+  <div class="content">
 
-      <div class="goal">
-        <b>Goal.</b> Create, develop, and evaluate a vertically integrated framework for resilient and PQ-secure NextG networks. It introduces new resilient, PQ-secure, and efficient cellular protocols and new PQ-safe signature and authentication schemes, and combines them with distributed, privacy-preserving AI techniques.
-      </div>
+    <!--Start Project Summary-->
+    <div class="section" id="summary">
+      <h2 class="add-top-margin">Collaborative Research: VINES: Track 1: Quantum-Ready and AI-Enabled by Design: Resilient and Deployable Next-Gen Cellular Networks</h2>
+      <hr>
+      <h3>Summary</h3>
+      <p class="text">
+        Next-generation (NextG) wireless networks will support smart cities, autonomous vehicles, and immersive communication, so they must keep performing under failures, attacks, and disruptions while protecting sensitive data and user privacy. Deployments are growing fast and base stations and servers are increasingly exposed to remote and physical access, so protocols must support distributed trust and stay secure even when parts of the network are breached. At the same time, quantum computers threaten today's cryptographic foundations, so protocols must be post-quantum (PQ) secure to remain safe long term.
+      </p>
+      <p class="text">
+        This project aims to create, develop, and evaluate a vertically integrated framework for resilient and PQ-secure NextG networks, addressing research vectors <b>A4 (Resilience)</b> and <b>B4 (Security &amp; Privacy)</b>.
+        1) New compact, compromise-resilient, and privacy-preserving PQ signature schemes (identity-based, threshold, and blind signatures) will be designed for constrained NextG environments.
+        2) New resilient and PQ-secure cellular protocols will be developed for initial bootstrapping, authentication and key agreement (5G-AKA, AKMA), and MVNO–MNO deployments, and formally verified.
+        3) Trustworthy AI for NextG will be developed, including federated-learning-based intrusion detection, PQ-secure federated learning with adaptive differential privacy, and verifiable model integrity.
+        All results will be evaluated end to end on <b>RIPPLE</b> (Resilient Intelligent Protocol Platform for Large-scale Evaluation), an open evaluation fabric built on the NSF Colosseum and POWDER testbeds.
+      </p>
 
-      <h3 style="margin-top:32px;font-size:1.15rem">Research questions</h3>
-      <ol class="rq">
-        <li>How can we strengthen NextG security and resilience against threats such as fake base stations, and make critical cellular protocols (5G-AKA, AKMA) PQ-secure?</li>
-        <li>How can we design PQ-secure cryptographic schemes (e.g., signatures, commitments) that are compact, identity-friendly, and support distributed deployment in constrained network environments?</li>
-        <li>How can AI-driven systems such as federated learning be made provably resilient to model manipulation, adversarial updates, and PQ attacks without sacrificing utility or privacy?</li>
-        <li>What system-level tradeoffs (computation vs. communication, key management, backward compatibility) come up when PQ-secure, resilient protocols are deployed in real NextG systems?</li>
-        <li>How can we build an evaluation fabric for reproducible, scalable validation of NextG protocols under real-world constraints, with broad community access?</li>
-      </ol>
-    </div>
-  </section>
-
-  <section id="research">
-    <div class="wrap">
-      <h2><span class="num">02</span>Research Thrusts</h2>
-      <p class="lead">Three thrusts build on one another: PQ primitives from Thrust 1 are used by the protocols in Thrust 2, and Thrust 3's trustworthy ML uses both. All three are validated end to end on the <b>RIPPLE</b> evaluation fabric.</p>
-
-      <figure class="figure">
+      <div class="figure">
         <svg viewBox="0 0 920 330" role="img" aria-labelledby="figT">
-          <title id="figT">Layered framework: Thrust 1 primitives at the base, Thrust 2 protocols in the middle, Thrust 3 trustworthy ML on top, with the RIPPLE evaluation fabric spanning all three.</title>
+          <title id="figT">Research program: Thrust 1 PQ primitives at the base, Thrust 2 protocols in the middle, Thrust 3 trustworthy ML on top, with the RIPPLE evaluation fabric spanning all three.</title>
           <defs>
-            <marker id="ar" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/>
-            </marker>
+            <marker id="ar" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker>
           </defs>
-          <!-- RIPPLE column -->
-          <rect x="10" y="10" width="150" height="310" rx="12" fill="var(--ev-soft)" stroke="var(--ev)"/>
-          <text x="85" y="140" text-anchor="middle" font-family="Inter" font-weight="700" font-size="16" fill="var(--ev)">RIPPLE</text>
-          <text x="85" y="162" text-anchor="middle" font-family="Inter" font-size="12" fill="var(--text)">Evaluation Fabric</text>
-          <text x="85" y="192" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--muted)">Colosseum</text>
-          <text x="85" y="208" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--muted)">NSF POWDER</text>
-          <text x="85" y="224" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--muted)">Lab testbed · COTS UEs</text>
+          <g font-family="Open Sans, Helvetica, Arial, sans-serif">
+            <rect x="10" y="10" width="150" height="310" rx="6" fill="#fbe9eb" stroke="#b3364a"/>
+            <text x="85" y="140" text-anchor="middle" font-weight="700" font-size="16" fill="#b3364a">RIPPLE</text>
+            <text x="85" y="162" text-anchor="middle" font-size="12" fill="#222">Evaluation Fabric</text>
+            <text x="85" y="192" text-anchor="middle" font-size="11" fill="#555">Colosseum</text>
+            <text x="85" y="208" text-anchor="middle" font-size="11" fill="#555">NSF POWDER</text>
+            <text x="85" y="224" text-anchor="middle" font-size="11" fill="#555">Lab testbed · COTS UEs</text>
 
-          <!-- Thrust 3 -->
-          <rect x="190" y="10" width="720" height="86" rx="12" fill="var(--t3-soft)" stroke="var(--t3)"/>
-          <text x="210" y="40" font-family="Inter" font-weight="700" font-size="14" fill="var(--t3)">THRUST 3 · Trustworthy ML for NextG Networks</text>
-          <text x="210" y="66" font-family="Inter" font-size="12.5" fill="var(--text)">FL-based intrusion detection · Adaptive differential privacy · Verifiable aggregation / model integrity</text>
+            <rect x="190" y="10" width="720" height="86" rx="6" fill="#efeafb" stroke="#6b4bb3"/>
+            <text x="210" y="40" font-weight="700" font-size="14" fill="#6b4bb3">THRUST 3 · Trustworthy ML for NextG Networks</text>
+            <text x="210" y="66" font-size="12.5" fill="#222">FL-based intrusion detection · Adaptive differential privacy · Verifiable model integrity</text>
 
-          <!-- Thrust 2 -->
-          <rect x="190" y="122" width="720" height="86" rx="12" fill="var(--t2-soft)" stroke="var(--t2)"/>
-          <text x="210" y="152" font-family="Inter" font-weight="700" font-size="14" fill="var(--t2)">THRUST 2 · Secure and Resilient NextG Cellular Protocols</text>
-          <text x="210" y="178" font-family="Inter" font-size="12.5" fill="var(--text)">PQ bootstrapping · NextG-AKA / AKMA · MVNO–MNO protocols · Formal verification</text>
+            <rect x="190" y="122" width="720" height="86" rx="6" fill="#fcf0de" stroke="#b26a12"/>
+            <text x="210" y="152" font-weight="700" font-size="14" fill="#b26a12">THRUST 2 · Secure and Resilient NextG Cellular Protocols</text>
+            <text x="210" y="178" font-size="12.5" fill="#222">PQ bootstrapping · NextG-AKA / AKMA · MVNO–MNO protocols · Formal verification</text>
 
-          <!-- Thrust 1 -->
-          <rect x="190" y="234" width="720" height="86" rx="12" fill="var(--t1-soft)" stroke="var(--t1)"/>
-          <text x="210" y="264" font-family="Inter" font-weight="700" font-size="14" fill="var(--t1)">THRUST 1 · Resilient, Compact and Private PQC</text>
-          <text x="210" y="290" font-family="Inter" font-size="12.5" fill="var(--text)">Identity-based signatures · Threshold signatures · Blind signatures · Security proofs</text>
+            <rect x="190" y="234" width="720" height="86" rx="6" fill="#e4f2ea" stroke="#2f7d5b"/>
+            <text x="210" y="264" font-weight="700" font-size="14" fill="#2f7d5b">THRUST 1 · Resilient, Compact and Private PQC</text>
+            <text x="210" y="290" font-size="12.5" fill="#222">Identity-based signatures · Threshold signatures · Blind signatures · Security proofs</text>
 
-          <!-- arrows -->
-          <line x1="820" y1="234" x2="820" y2="212" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ar)"/>
-          <text x="830" y="226" font-family="Inter" font-size="10.5" fill="var(--muted)">PQ primitives</text>
-          <line x1="820" y1="122" x2="820" y2="100" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ar)"/>
-          <text x="830" y="114" font-family="Inter" font-size="10.5" fill="var(--muted)">protocols</text>
-          <line x1="160" y1="165" x2="186" y2="165" stroke="var(--ev)" stroke-width="1.5" marker-end="url(#ar)"/>
+            <line x1="820" y1="234" x2="820" y2="212" stroke="#555" stroke-width="1.5" marker-end="url(#ar)"/>
+            <text x="830" y="226" font-size="10.5" fill="#555">PQ primitives</text>
+            <line x1="820" y1="122" x2="820" y2="100" stroke="#555" stroke-width="1.5" marker-end="url(#ar)"/>
+            <text x="830" y="114" font-size="10.5" fill="#555">protocols</text>
+            <line x1="160" y1="165" x2="186" y2="165" stroke="#b3364a" stroke-width="1.5" marker-end="url(#ar)"/>
+          </g>
         </svg>
-        <figcaption>The vertically integrated research program.</figcaption>
-      </figure>
-
-      <div class="grid g2" style="margin-top:28px">
-        <article class="card thrust" style="--c: var(--t1)">
-          <div class="label">Thrust 1</div>
-          <h3>Resilient, Compact and Private PQC for NextG</h3>
-          <p class="lead-pi">Lead: Attila A. Yavuz (USF)</p>
-          <ul class="tasks">
-            <li><b>Task 1.1: Efficient identity-based signatures</b><span>Lattice IBS with uniformly random keys and signatures, enabling certificate-free authentication without certificate chains.</span></li>
-            <li><b>Task 1.2: Key-compromise-resilient threshold signatures</b><span>Direct secret sharing of uniform signing keys, so base stations and core network (CN) nodes can sign jointly.</span></li>
-            <li><b>Task 1.3: Privacy-enhanced PQ blind protocols</b><span>Additive blinding with no auxiliary rejection steps, for unlinkable, low-latency authentication.</span></li>
-            <li><b>Task 1.4: Security analysis and optimization</b><span>Proofs in the QROM (EU-CMA-UC, t-EU-CMA, blindness) and optimized ARM implementations.</span></li>
-          </ul>
-        </article>
-
-        <article class="card thrust" style="--c: var(--t2)">
-          <div class="label">Thrust 2</div>
-          <h3>Secure and Resilient NextG Cellular Protocols</h3>
-          <p class="lead-pi">Lead: Imtiaz Karim (UT Dallas)</p>
-          <ul class="tasks">
-            <li><b>Task 2.1: PQ-secure UE bootstrapping authentication</b><span>MAYO root of trust provisioned to the eSIM, plus temporal Falcon keys and TESLA for SIB authentication.</span></li>
-            <li><b>Task 2.2: Resilient AKA protocols</b><span>NextG-AKA/AKMA built on key-homomorphic PRFs and secret sharing, so long-term secrets survive the compromise of some CN components.</span></li>
-            <li><b>Task 2.3: Secure MVNO–MNO protocols</b><span>Anonymous BS–CN authentication, privacy-preserving revocation, and distributed audit logging.</span></li>
-            <li><b>Task 2.4: Formal security analysis</b><span>End-to-end symbolic verification with Tamarin, ProVerif, and DeepSec.</span></li>
-          </ul>
-        </article>
-
-        <article class="card thrust" style="--c: var(--t3)">
-          <div class="label">Thrust 3</div>
-          <h3>PQ-Secure and Resilient AI for NextG</h3>
-          <p class="lead-pi">Lead: Rouzbeh Behnia (USF)</p>
-          <ul class="tasks">
-            <li><b>Task 3.1: AI-based intrusion detection</b><span>O-RAN federated learning that combines UE-centric and network-centric views across protocol layers for low false positives.</span></li>
-            <li><b>Task 3.2: PQ-secure FL with differential privacy</b><span>Multi-agent, RL-driven coordination that tunes per-client privacy budgets.</span></li>
-            <li><b>Task 3.3: Proof of integrity for FL</b><span>Lattice-based commitments that let clients verify their updates were included in aggregation, with no trusted aggregator.</span></li>
-            <li><b>Task 3.4: Security analysis</b><span>Evaluation against membership-inference and reconstruction attacks, plus reduction proofs to SIS/LWE.</span></li>
-          </ul>
-        </article>
-
-        <article class="card thrust" style="--c: var(--ev)">
-          <div class="label">Evaluation</div>
-          <h3>RIPPLE Evaluation Fabric</h3>
-          <p class="lead-pi">Resilient Intelligent Protocol Platform for Large-scale Evaluation</p>
-          <ul class="tasks">
-            <li><b>Portable PQ modules</b><span>Modular crypto libraries that plug into open-source stacks (srsRAN, OpenAirInterface, Open5GS).</span></li>
-            <li><b>Large-scale testbeds</b><span>Colosseum for emulation at scale and NSF POWDER for city-scale over-the-air trials with mobility and handover.</span></li>
-            <li><b>Open access</b><span>Public containers, profiles, standardized benchmarks, and a future leaderboard for PQ-secure NextG schemes.</span></li>
-          </ul>
-        </article>
+        <div class="caption">Overview of the vertically integrated research program.</div>
       </div>
     </div>
-  </section>
+    <!--End Project Summary-->
 
-  <section id="support">
-    <div class="wrap">
-      <h2><span class="num">03</span>Support</h2>
-      <p class="lead">This project is supported by the U.S. National Science Foundation under the <b>VINES</b> program (CNS, Use-Inspired NextG) through collaborative awards to Purdue University, The University of Texas at Dallas, and the University of South Florida.</p>
-      <!-- TODO: add award links once public, e.g. https://www.nsf.gov/awardsearch/showAward?AWD_ID=XXXXXXX -->
+    <!--Start Support-->
+    <div class="section" id="support">
+      <h2 class="add-top-margin">Support</h2>
+      <hr>
+      <ul>
+        <!-- TODO: replace with NSF award links once public, e.g. https://www.nsf.gov/awardsearch/showAward?AWD_ID=XXXXXXX -->
+        <li>National Science Foundation, VINES Track 1 (CNS, Use-Inspired NextG). Collaborative awards to Purdue University, The University of Texas at Dallas, and the University of South Florida.</li>
+      </ul>
     </div>
-  </section>
+    <!--End Support-->
 
-  <section id="people">
-    <div class="wrap">
-      <h2><span class="num">04</span>People</h2>
-      <h3 style="font-size:1.1rem;margin-bottom:14px">Principal Investigators</h3>
-      <div class="grid g4">
-        <div class="card person">
-          <div class="avatar" aria-hidden="true">EB</div>
-          <div>
-            <h3>Elisa Bertino</h3>
-            <div class="role">Lead PI · Professor of CS, Purdue University</div>
-            <div class="area">Project management and coordination; cellular network security, zero-trust architectures, AI for cybersecurity.</div>
-          </div>
-        </div>
-        <div class="card person">
-          <div class="avatar" aria-hidden="true">IK</div>
-          <div>
-            <h3>Imtiaz Karim</h3>
-            <div class="role">PI · Assistant Professor of CS, UT Dallas</div>
-            <div class="area">Leads Thrust 2 and RIPPLE; cellular and NextG security, formal verification, AI for protocol analysis.</div>
-          </div>
-        </div>
-        <div class="card person">
-          <div class="avatar" aria-hidden="true">RB</div>
-          <div>
-            <h3>Rouzbeh Behnia</h3>
-            <div class="role">PI · Assistant Professor, University of South Florida</div>
-            <div class="area">Leads Thrust 3; post-quantum cryptography, security and privacy of AI.</div>
-          </div>
-        </div>
-        <div class="card person">
-          <div class="avatar" aria-hidden="true">AY</div>
-          <div>
-            <h3>Attila A. Yavuz</h3>
-            <div class="role">Co-PI · Associate Professor, Bellini College of AI, Cybersecurity and Computing, USF</div>
-            <div class="area">Leads Thrust 1; applied cryptography and network security.</div>
-          </div>
-        </div>
-      </div>
-
-      <h3 style="font-size:1.1rem;margin:28px 0 10px">Student Researchers</h3>
-      <p class="muted">PhD students at Purdue, UT Dallas, and USF. Names will be added as the team is finalized.</p>
+    <!--Start People-->
+    <div class="section" id="people">
+      <h2 class="add-top-margin">People</h2>
+      <hr>
+      <ul>
+        <li>Elisa Bertino. Lead PI on this project, project coordinator and professor (Purdue CS).</li>
+        <li>Imtiaz Karim. PI on this project, Thrust 2 and RIPPLE lead and assistant professor (UT Dallas CS).</li>
+        <li>Rouzbeh Behnia. PI on this project, Thrust 3 lead and assistant professor (USF).</li>
+        <li>Attila A. Yavuz. Co-PI on this project, Thrust 1 lead and associate professor (USF Bellini College of AI, Cybersecurity and Computing).</li>
+        <!-- TODO: add student researchers, e.g. <li>Name. Student Researcher (UT Dallas CS).</li> -->
+      </ul>
     </div>
-  </section>
+    <!--End People-->
 
-  <section id="timeline">
-    <div class="wrap">
-      <h2><span class="num">05</span>Project Timeline</h2>
-      <p class="lead" style="margin-bottom:18px">Three-year plan starting Fall 2026.</p>
-      <div class="gantt-wrap">
-        <table class="gantt">
+    <!--Start Project Timeline-->
+    <div class="section" id="timeline">
+      <h2 class="add-top-margin">Project Timeline</h2>
+      <hr>
+      <div class="table-wrap">
+        <table class="custom-table">
           <thead>
-            <tr><th rowspan="2" style="text-align:left;padding-left:14px">Task</th><th colspan="4" class="yr">Year 1</th><th colspan="4" class="yr">Year 2</th><th colspan="4" class="yr">Year 3</th></tr>
-            <tr>
-              <th class="yr">Q1</th><th>Q2</th><th>Q3</th><th>Q4</th>
-              <th class="yr">Q1</th><th>Q2</th><th>Q3</th><th>Q4</th>
-              <th class="yr">Q1</th><th>Q2</th><th>Q3</th><th>Q4</th>
-            </tr>
+            <tr><th>Task</th><th>Projected Year</th><th>Status</th></tr>
           </thead>
-          <tbody id="gantt-body"></tbody>
+          <tbody>
+            <tr><td class="left">Create and open a project web site.</td><td>Year 1</td><td>done</td></tr>
+            <tr><td class="left">Task 1.1: Efficient lattice-based identity-based signatures.</td><td>Year 1–2</td><td>in progress</td></tr>
+            <tr><td class="left">Task 1.2: Key-compromise-resilient PQ threshold signatures.</td><td>Year 1–2</td><td>in progress</td></tr>
+            <tr><td class="left">Task 1.3: Privacy-enhanced PQ blind signature protocols.</td><td>Year 1–2</td><td>in progress</td></tr>
+            <tr><td class="left">Build the RIPPLE evaluation fabric on the lab testbed, Colosseum, and POWDER.</td><td>Year 1–3</td><td>in progress</td></tr>
+            <tr><td class="left">Task 2.1: PQ-secure UE bootstrapping authentication.</td><td>Year 2–3</td><td>planned</td></tr>
+            <tr><td class="left">Task 2.2: Resilient NextG-AKA and AKMA protocols.</td><td>Year 2–3</td><td>planned</td></tr>
+            <tr><td class="left">Task 2.3: Security and privacy enhanced protocols for MVNOs.</td><td>Year 2–3</td><td>planned</td></tr>
+            <tr><td class="left">Task 3.1: Advanced AI-based intrusion detection (O-RAN federated learning).</td><td>Year 2–3</td><td>planned</td></tr>
+            <tr><td class="left">Task 3.2: PQ-secure federated learning with adaptive differential privacy.</td><td>Year 2–3</td><td>planned</td></tr>
+            <tr><td class="left">Task 3.3: Proof of integrity for federated learning in NextG networks.</td><td>Year 2–3</td><td>planned</td></tr>
+            <tr><td class="left">Deploy and evaluate protocols on large-scale testbeds and COTS UEs.</td><td>Year 2–3</td><td>planned</td></tr>
+            <tr><td class="left">Release open-source software, formal models, and RIPPLE containers/profiles.</td><td>Year 3</td><td>planned</td></tr>
+          </tbody>
         </table>
       </div>
     </div>
-  </section>
+    <!--End Project Timeline-->
 
-  <section id="publications">
-    <div class="wrap">
-      <h2><span class="num">06</span>Publications</h2>
-      <h3 style="font-size:1.1rem;margin-bottom:10px">Project publications</h3>
-      <p class="muted" style="margin-bottom:28px">Publications from this project will be listed here as they appear.</p>
-
-      <h3 style="font-size:1.1rem;margin-bottom:14px">Foundational work by the team</h3>
-      <ul class="pubs">
-        <li>
-          <div class="t">Gotta Detect 'Em All: Fake Base Station and Multi-Step Attack Detection in Cellular Networks</div>
-          <div class="a">Kazi Samin Mubasshir, Imtiaz Karim, Elisa Bertino</div>
-          <div class="v">USENIX Security 2025</div>
-        </li>
-        <li>
-          <div class="t">AKMA+: Security and Privacy-Enhanced and Standard-Compatible AKMA for 5G Communication</div>
-          <div class="a">Yang Yang, Guomin Yang, Yingjiu Li, Minming Huang, Zilin Shen, Imtiaz Karim, Ralf Sasse, David Basin, Elisa Bertino, Jian Weng, Hwee Hwa Pang, Robert H. Deng</div>
-          <div class="v">USENIX Security 2025</div>
-        </li>
-        <li>
-          <div class="t">Standing Firm in 5G: A Single-Round, Dropout-Resilient Secure Aggregation for Federated Learning</div>
-          <div class="a">Yiwei Zhang, Rouzbeh Behnia, Imtiaz Karim, Attila A. Yavuz, Elisa Bertino</div>
-          <div class="v">ACM WiSec 2025</div>
-        </li>
-        <li>
-          <div class="t">Efficient Full-Stack Private Federated Deep Learning with Post-Quantum Security</div>
-          <div class="a">Yiwei Zhang, Rouzbeh Behnia, Attila A. Yavuz, Reza Ebrahimi, Elisa Bertino</div>
-          <div class="v">IEEE Transactions on Dependable and Secure Computing, 2025</div>
-        </li>
-        <li>
-          <div class="t">WCDCAnalyzer: Scalable Security Analysis of Wi-Fi Certified Device Connectivity Protocols</div>
-          <div class="a">Zilin Shen, Imtiaz Karim, Elisa Bertino</div>
-          <div class="v">NDSS 2026</div>
-        </li>
-        <li>
-          <div class="t">CellularLint: A Systematic Approach to Identify Inconsistent Behavior in Cellular Network Specifications</div>
-          <div class="a">Mirza Masfiqur Rahman, Imtiaz Karim, Elisa Bertino</div>
-          <div class="v">USENIX Security 2024</div>
-        </li>
-        <li>
-          <div class="t">SPEC5G: A Dataset for 5G Cellular Network Protocol Analysis</div>
-          <div class="a">Imtiaz Karim, Kazi Samin Mubasshir, Mirza Masfiqur Rahman, Elisa Bertino</div>
-          <div class="v">Findings of IJCNLP-AACL 2023</div>
-        </li>
-        <li>
-          <div class="t">Look Before You Leap: Secure Connection Bootstrapping for 5G Networks to Defend Against Fake Base-Stations</div>
-          <div class="a">Ankush Singla, Rouzbeh Behnia, Syed Rafiul Hussain, Attila A. Yavuz, Elisa Bertino</div>
-          <div class="v">ACM AsiaCCS 2021</div>
-        </li>
-        <li>
-          <div class="t">On Removing Rejection Conditions in Practical Lattice-Based Signatures</div>
-          <div class="a">Rouzbeh Behnia, Yilei Chen, Daniel Masny</div>
-          <div class="v">PQCrypto 2021</div>
-        </li>
-        <li>
-          <div class="t">5GReasoner: A Property-Directed Security and Privacy Analysis Framework for 5G Cellular Network Protocol</div>
-          <div class="a">Syed Rafiul Hussain, Mitziu Echeverria, Imtiaz Karim, Omar Chowdhury, Elisa Bertino</div>
-          <div class="v">ACM CCS 2019</div>
-        </li>
-        <li>
-          <div class="t">Insecure Connection Bootstrapping in Cellular Networks: The Root of All Evil</div>
-          <div class="a">Syed Rafiul Hussain, Mitziu Echeverria, Ankush Singla, Omar Chowdhury, Elisa Bertino</div>
-          <div class="v">ACM WiSec 2019</div>
-        </li>
+    <!--Start Publications-->
+    <div class="section" id="publications">
+      <h2 class="add-top-margin">Publications</h2>
+      <hr>
+      <p class="text muted">Publications from this project will be listed here as they appear. Earlier work by the team that this project builds on:</p>
+      <ul>
+        <li><span class="venue">[USENIX Sec25]</span> Kazi Samin Mubasshir, Imtiaz Karim, and Elisa Bertino.<br>
+          Gotta Detect 'Em All: Fake Base Station and Multi-Step Attack Detection in Cellular Networks.<br>
+          In Proceedings of the 34th USENIX Security Symposium, August 2025.</li>
+        <li><span class="venue">[USENIX Sec25]</span> Yang Yang, Guomin Yang, Yingjiu Li, Minming Huang, Zilin Shen, Imtiaz Karim, Ralf Sasse, David Basin, Elisa Bertino, Jian Weng, Hwee Hwa Pang, and Robert H. Deng.<br>
+          AKMA+: Security and Privacy-Enhanced and Standard-Compatible AKMA for 5G Communication.<br>
+          In Proceedings of the 34th USENIX Security Symposium, August 2025.</li>
+        <li><span class="venue">[WiSec25]</span> Yiwei Zhang, Rouzbeh Behnia, Imtiaz Karim, Attila A. Yavuz, and Elisa Bertino.<br>
+          Standing Firm in 5G: A Single-Round, Dropout-Resilient Secure Aggregation for Federated Learning.<br>
+          In Proceedings of the 18th ACM Conference on Security and Privacy in Wireless and Mobile Networks, 2025.</li>
+        <li><span class="venue">[TDSC]</span> Yiwei Zhang, Rouzbeh Behnia, Attila A. Yavuz, Reza Ebrahimi, and Elisa Bertino.<br>
+          Efficient Full-Stack Private Federated Deep Learning with Post-Quantum Security.<br>
+          In IEEE Transactions on Dependable and Secure Computing, 2025.</li>
+        <li><span class="venue">[NDSS26]</span> Zilin Shen, Imtiaz Karim, and Elisa Bertino.<br>
+          WCDCAnalyzer: Scalable Security Analysis of Wi-Fi Certified Device Connectivity Protocols.<br>
+          In Network and Distributed System Security Symposium, 2026.</li>
+        <li><span class="venue">[USENIX Sec24]</span> Mirza Masfiqur Rahman, Imtiaz Karim, and Elisa Bertino.<br>
+          CellularLint: A Systematic Approach to Identify Inconsistent Behavior in Cellular Network Specifications.<br>
+          In Proceedings of the 33rd USENIX Security Symposium, August 2024.</li>
+        <li><span class="venue">[AACL23]</span> Imtiaz Karim, Kazi Samin Mubasshir, Mirza Masfiqur Rahman, and Elisa Bertino.<br>
+          SPEC5G: A Dataset for 5G Cellular Network Protocol Analysis.<br>
+          In Findings of the Association for Computational Linguistics: IJCNLP-AACL, November 2023.</li>
+        <li><span class="venue">[AsiaCCS21]</span> Ankush Singla, Rouzbeh Behnia, Syed Rafiul Hussain, Attila A. Yavuz, and Elisa Bertino.<br>
+          Look Before You Leap: Secure Connection Bootstrapping for 5G Networks to Defend Against Fake Base-Stations.<br>
+          In Proceedings of the 2021 ACM Asia Conference on Computer and Communications Security, 2021.</li>
+        <li><span class="venue">[PQCrypto21]</span> Rouzbeh Behnia, Yilei Chen, and Daniel Masny.<br>
+          On Removing Rejection Conditions in Practical Lattice-Based Signatures.<br>
+          In Post-Quantum Cryptography: 12th International Workshop, July 2021.</li>
+        <li><span class="venue">[CCS19]</span> Syed Rafiul Hussain, Mitziu Echeverria, Imtiaz Karim, Omar Chowdhury, and Elisa Bertino.<br>
+          5GReasoner: A Property-Directed Security and Privacy Analysis Framework for 5G Cellular Network Protocol.<br>
+          In Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security, November 2019.</li>
+        <li><span class="venue">[WiSec19]</span> Syed Rafiul Hussain, Mitziu Echeverria, Ankush Singla, Omar Chowdhury, and Elisa Bertino.<br>
+          Insecure Connection Bootstrapping in Cellular Networks: The Root of All Evil.<br>
+          In Proceedings of the 12th ACM Conference on Security and Privacy in Wireless and Mobile Networks, 2019.</li>
       </ul>
     </div>
-  </section>
+    <!--End Publications-->
 
-  <section id="software">
-    <div class="wrap">
-      <h2><span class="num">07</span>Software &amp; Artifacts</h2>
-      <p class="lead">All protocol specifications, formal models, ML models, datasets, and software from the project will be released under open licenses on GitHub and archived on Zenodo. Planned releases include:</p>
-      <ul class="plain" style="margin-top:14px">
-        <li>PQ signature libraries (identity-based, threshold, blind) in portable C with ARM optimizations</li>
-        <li>PQ-secure bootstrapping, NextG-AKA/AKMA, and MVNO protocol implementations for srsRAN, OpenAirInterface, and Open5GS</li>
-        <li>Tamarin / ProVerif models of the designed protocols</li>
-        <li>O-RAN xApps for federated intrusion detection</li>
-        <li>RIPPLE containers and profiles for Colosseum and NSF POWDER</li>
+    <!--Start Software-->
+    <div class="section" id="software">
+      <h2 class="add-top-margin">Software</h2>
+      <hr>
+      <ul>
+        <!-- TODO: add GitHub repository links -->
+        <li>PQ signature libraries (identity-based, threshold, blind) in portable C (coming soon).</li>
+        <li>PQ-secure bootstrapping, NextG-AKA/AKMA, and MVNO protocol implementations for srsRAN, OpenAirInterface, and Open5GS (coming soon).</li>
+        <li>Tamarin / ProVerif models of the designed protocols (coming soon).</li>
+        <li>RIPPLE evaluation fabric: Colosseum containers and POWDER profiles (coming soon).</li>
       </ul>
-      <!-- TODO: add GitHub organization link -->
     </div>
-  </section>
+    <!--End Software-->
 
-  <section id="outreach">
-    <div class="wrap">
-      <h2><span class="num">08</span>Education &amp; Outreach</h2>
-      <div class="grid g2">
-        <div class="card">
-          <h3 style="font-size:1.1rem;margin-bottom:10px">Curriculum</h3>
-          <p>Project results will feed new course modules on:</p>
-          <ul class="plain" style="margin-top:8px">
-            <li>PQ-resistant protocols for cellular networks</li>
-            <li>ML techniques for cellular network security</li>
-            <li>Edge-computing-enabled cybersecurity</li>
-          </ul>
-          <p style="margin-top:10px">Modules will be integrated into courses such as <i>CIS 4212/6214 Trustworthy and Privacy-preserving Cyberinfrastructures</i> (USF) and a UT Dallas course on security and privacy of emerging technologies (6G, NTN). Students will also get hands-on testbed training on POWDER and Colosseum.</p>
-        </div>
-        <div class="card">
-          <h3 style="font-size:1.1rem;margin-bottom:10px">Broadening participation</h3>
-          <ul class="plain">
-            <li><b>Purdue:</b> undergraduate research through the CS Office of Student Experience.</li>
-            <li><b>UT Dallas:</b> 5G/NextG security sessions at WEhack and the department's K–12 summer coding camps.</li>
-            <li><b>USF:</b> privacy-preserving FL and PQC modules at Cybersecurity Day and Big Data Day for high-school students, and the CodeBreakhers summer camp.</li>
-            <li><b>Standards:</b> engagement with 3GPP, GSMA, and ETSI.</li>
-          </ul>
-        </div>
-      </div>
+    <!--Start Outreach-->
+    <div class="section" id="outreach">
+      <h2 class="add-top-margin">Outreach</h2>
+      <hr>
+      <ul>
+        <li>New course modules on PQ-resistant protocols for cellular networks, ML for cellular network security, and edge-computing-enabled cybersecurity.</li>
+        <li>Course at USF: CIS 4212/6214 Trustworthy and Privacy-preserving Cyberinfrastructures.</li>
+        <li>Course at UT Dallas: Security and privacy of emerging technologies (6G and NTN networks).</li>
+        <li>5G/NextG security sessions at WEhack 2026 and the UT Dallas K–12 summer coding camps.</li>
+        <li>Privacy-preserving federated learning and PQC modules at USF Cybersecurity Day and Big Data Day.</li>
+        <li>Hands-on testbed training for students on NSF POWDER and Colosseum.</li>
+      </ul>
     </div>
-  </section>
-</main>
+    <!--End Outreach-->
 
-<footer>
-  <div class="wrap">
-    <p class="ack">This material is based upon work supported by the National Science Foundation. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.</p>
-    <p style="margin-top:12px">© 2026 VINES NextG Project · Purdue University · UT Dallas · University of South Florida</p>
+    <div class="section">
+      <p class="text muted add-top-margin" style="font-size:14px">This material is based upon work supported by the National Science Foundation. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.</p>
+    </div>
+
   </div>
-</footer>
-
-<script>
-  // Timeline rows: [label, color var, start quarter (0-11), end quarter inclusive]
-  const rows = [
-    ["Task 1.1", "--t1", 0, 5], ["Task 1.2", "--t1", 0, 5], ["Task 1.3", "--t1", 0, 5],
-    ["Task 2.1", "--t2", 4, 9], ["Task 2.2", "--t2", 4, 9], ["Task 2.3", "--t2", 4, 9],
-    ["Task 3.1", "--t3", 6, 11], ["Task 3.2", "--t3", 6, 11], ["Task 3.3", "--t3", 6, 11],
-    ["Evaluation", "--ev", 0, 11], ["Deployment", "--ev", 4, 11],
-  ];
-  const body = document.getElementById("gantt-body");
-  for (const [label, c, s, e] of rows) {
-    const tr = document.createElement("tr");
-    tr.style.setProperty("--c", `var(${c})`);
-    let html = `<td class="task">${label}</td>`;
-    for (let q = 0; q < 12; q++) {
-      const cls = [q % 4 === 0 ? "yr" : ""];
-      if (q >= s && q <= e) cls.push("on", q === s ? "first" : "", q === e ? "last" : "");
-      html += `<td class="${cls.join(" ").trim()}"></td>`;
-    }
-    tr.innerHTML = html;
-    body.appendChild(tr);
-  }
-</script>
 </body>
+
 </html>
